@@ -1,0 +1,22 @@
+ ⨯ ./components/TestInterface.tsx:7:1
+Module not found: Can't resolve '@/lib/userStats'
+[0m [90m  5 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { calculateReactionPercentile } [36mfrom[39m [32m'@/lib/percentile'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { setLastResult[33m,[39m updateUserStats } [36mfrom[39m [32m'@/lib/userStats'[39m[0m
+[0m [90m    |[39m [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mconst[39m [33mTOTAL_ROUNDS[39m [33m=[39m [35m5[39m[0m
+[0m [90m 10 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./components/TestInterface.tsx:7:1
+Module not found: Can't resolve '@/lib/userStats'
+[0m [90m  5 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m'next/navigation'[39m[0m
+[0m [90m  6 |[39m [36mimport[39m { calculateReactionPercentile } [36mfrom[39m [32m'@/lib/percentile'[39m[0m
+[0m[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { setLastResult[33m,[39m updateUserStats } [36mfrom[39m [32m'@/lib/userStats'[39m[0m
+[0m [90m    |[39m [31m[1m^[22m[39m[0m
+[0m [90m  8 |[39m[0m
+[0m [90m  9 |[39m [36mconst[39m [33mTOTAL_ROUNDS[39m [33m=[39m [35m5[39m[0m
+[0m [90m 10 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found

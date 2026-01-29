@@ -1,0 +1,34 @@
+
+> percentile@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 1862ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.2s (1246 modules)
+ GET / 200 in 2497ms
+ ✓ Compiled /test in 467ms (1239 modules)
+ ✓ Compiled /results in 485ms (1253 modules)
+ GET / 200 in 105ms
+ GET / 200 in 46ms
+ GET /results?avg=783&times=799,473,585,1658,402&p=1 200 in 64ms
+ GET /test 200 in 33ms
+ GET / 200 in 33ms
+ ✓ Compiled in 466ms (1269 modules)
+ ✓ Compiled in 133ms (637 modules)
+ ✓ Compiled in 155ms (637 modules)
+ ✓ Compiled in 134ms (637 modules)
+ ✓ Compiled in 193ms (1255 modules)
+ ✓ Compiled in 145ms (637 modules)
+ ✓ Compiled in 154ms (1255 modules)
+ ✓ Compiled in 140ms (637 modules)
+ ✓ Compiled in 165ms (1255 modules)
+ ✓ Compiled in 184ms (637 modules)
+ ✓ Compiled in 172ms (637 modules)
+ ✓ Compiled in 156ms (637 modules)
+ ✓ Compiled in 144ms (637 modules)
+ ✓ Compiled in 216ms (1255 modules)
+ ✓ Compiled in 246ms (637 modules)
