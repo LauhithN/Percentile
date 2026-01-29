@@ -1,4 +1,4 @@
-﻿const FAKE_SCORES = [
+const FAKE_SCORES = [
   { name: 'NeonPulse', time: 187, percentile: 98, date: 'Jan 29, 2026' },
   { name: 'ZeroLatency', time: 199, percentile: 96, date: 'Jan 29, 2026' },
   { name: 'QuickSilver', time: 204, percentile: 95, date: 'Jan 29, 2026' },

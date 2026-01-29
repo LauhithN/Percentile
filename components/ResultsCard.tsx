@@ -1,18 +1,42 @@
-﻿'use client'
+'use client'
 
 import { animate } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { BellCurve } from './BellCurve'
 import { ShareButtons } from './ShareButtons'
+import { TestType } from '@/lib/tests'
 
 interface ResultsCardProps {
+  testType: TestType
   percentile: number
-  avg: number
-  times: number[]
+  resultLine: string
+  statLine: string
+  breakdown: Array<{ label: string; value: string }>
+  comparison: {
+    topLabel: string
+    topValue: string
+    bottomLabel: string
+    bottomValue: string
+  }
+  testRoute: string
+  bellCurve: {
+    leftLabel: string
+    rightLabel: string
+    accent: string
+  }
 }
 
-export function ResultsCard({ percentile, avg, times }: ResultsCardProps) {
+export function ResultsCard({
+  testType,
+  percentile,
+  resultLine,
+  statLine,
+  breakdown,
+  comparison,
+  testRoute,
+  bellCurve
+}: ResultsCardProps) {
   const [displayPercentile, setDisplayPercentile] = useState(0)
 
   useEffect(() => {
@@ -25,8 +49,6 @@ export function ResultsCard({ percentile, avg, times }: ResultsCardProps) {
     return () => controls.stop()
   }, [percentile])
 
-  const best = useMemo(() => Math.min(...times), [times])
-
   return (
     <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr]">
       <div className="flex flex-col gap-8">
@@ -37,19 +59,17 @@ export function ResultsCard({ percentile, avg, times }: ResultsCardProps) {
               {displayPercentile}%
             </span>
           </div>
-          <p className="mt-4 text-2xl">You&apos;re faster than {percentile}% of people</p>
-          <p className="mt-2 text-sm uppercase tracking-[0.3em] text-white/60">
-            {avg}ms average · {best}ms best
-          </p>
+          <p className="mt-4 text-2xl">{resultLine}</p>
+          <p className="mt-2 text-sm uppercase tracking-[0.3em] text-white/60">{statLine}</p>
         </div>
 
         <div className="border border-white/10 p-8">
-          <BellCurve percentile={percentile} />
+          <BellCurve percentile={percentile} leftLabel={bellCurve.leftLabel} rightLabel={bellCurve.rightLabel} accent={bellCurve.accent} />
         </div>
 
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/test"
+            href={testRoute}
             className="border border-accent bg-accent px-6 py-3 text-xs uppercase tracking-[0.35em] text-white transition hover:scale-[1.02]"
           >
             Test Again
@@ -75,12 +95,12 @@ export function ResultsCard({ percentile, avg, times }: ResultsCardProps) {
           <p className="text-xs uppercase tracking-[0.4em] text-white/50">Comparison</p>
           <div className="mt-5 flex flex-col gap-4 text-lg">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <span>Faster than</span>
-              <span className="text-white/60">Average person</span>
+              <span>{comparison.topLabel}</span>
+              <span className="text-white/60">{comparison.topValue}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Slower than</span>
-              <span className="text-white/60">Pro gamer</span>
+              <span>{comparison.bottomLabel}</span>
+              <span className="text-white/60">{comparison.bottomValue}</span>
             </div>
           </div>
         </div>
@@ -88,16 +108,16 @@ export function ResultsCard({ percentile, avg, times }: ResultsCardProps) {
         <div className="border border-white/10 p-6">
           <p className="text-xs uppercase tracking-[0.4em] text-white/50">Share</p>
           <p className="mt-3 text-sm text-white/70">Make them believe it.</p>
-          <ShareButtons percentile={percentile} />
+          <ShareButtons percentile={percentile} testType={testType} />
         </div>
 
         <div className="border border-white/10 p-6">
           <p className="text-xs uppercase tracking-[0.4em] text-white/50">Breakdown</p>
           <div className="mt-4 space-y-2 text-sm text-white/70">
-            {times.map((time, index) => (
-              <div key={`${time}-${index}`} className="flex items-center justify-between">
-                <span>Round {index + 1}</span>
-                <span>{time}ms</span>
+            {breakdown.map((item) => (
+              <div key={item.label} className="flex items-center justify-between">
+                <span>{item.label}</span>
+                <span>{item.value}</span>
               </div>
             ))}
           </div>
@@ -106,4 +126,3 @@ export function ResultsCard({ percentile, avg, times }: ResultsCardProps) {
     </div>
   )
 }
-

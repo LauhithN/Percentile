@@ -1,10 +1,13 @@
-﻿'use client'
+'use client'
 
 interface BellCurveProps {
   percentile: number
+  leftLabel?: string
+  rightLabel?: string
+  accent?: string
 }
 
-export function BellCurve({ percentile }: BellCurveProps) {
+export function BellCurve({ percentile, leftLabel = 'Low', rightLabel = 'High', accent = '#0066FF' }: BellCurveProps) {
   const width = 520
   const height = 220
   const center = width / 2
@@ -40,21 +43,13 @@ export function BellCurve({ percentile }: BellCurveProps) {
           </linearGradient>
         </defs>
         <path d={path} fill="none" stroke="url(#curve)" strokeWidth="3" />
-        <line
-          x1={markerX}
-          y1={20}
-          x2={markerX}
-          y2={height - 10}
-          stroke="#0066FF"
-          strokeWidth="2"
-        />
-        <circle cx={markerX} cy={height - 20} r="6" fill="#0066FF" />
+        <line x1={markerX} y1={20} x2={markerX} y2={height - 10} stroke={accent} strokeWidth="2" />
+        <circle cx={markerX} cy={height - 20} r="6" fill={accent} />
       </svg>
       <div className="flex justify-between text-xs uppercase tracking-[0.3em] text-white/40">
-        <span>Slow</span>
-        <span>Fast</span>
+        <span>{leftLabel}</span>
+        <span>{rightLabel}</span>
       </div>
     </div>
   )
 }
-

@@ -30,6 +30,7 @@ export function MemoryTest() {
   const [statusText, setStatusText] = useState('')
   const [feedback, setFeedback] = useState<'success' | 'fail' | null>(null)
   const [errorText, setErrorText] = useState('')
+  const [errorMark, setErrorMark] = useState(false)
 
   const roundCorrectRef = useRef(true)
   const longestRef = useRef(0)
@@ -115,6 +116,8 @@ export function MemoryTest() {
       setErrorText('')
     } else {
       setErrorText(`Wrong. Expected ${COLORS[expected].name}.`)
+      setErrorMark(true)
+      window.setTimeout(() => setErrorMark(false), 400)
       window.setTimeout(() => setErrorText(''), 600)
     }
 
@@ -177,7 +180,7 @@ export function MemoryTest() {
   }
 
   return (
-    <main className="flex min-h-[100dvh] flex-col items-center justify-center gap-10 bg-ink px-6 py-12 text-center">
+    <main className="flex min-h-[100dvh] flex-col items-center justify-center gap-10 bg-ink px-6 py-12 text-center touch-none select-none">
       <div className="absolute left-6 top-6 text-xs uppercase tracking-[0.4em] text-white/60">
         Round {roundIndex + 1}/{ROUNDS.length}
       </div>
@@ -199,12 +202,20 @@ export function MemoryTest() {
       {phase !== 'idle' && (
         <div className="flex w-full max-w-3xl flex-col items-center gap-6">
           <div className="text-xs uppercase tracking-[0.4em] text-white/60">{statusText}</div>
-          {errorText && <div className="text-xs uppercase tracking-[0.3em] text-red-400">{errorText}</div>}
-          <div className="grid w-full grid-cols-2 gap-5">
+          {errorText && (
+            <div className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.3em] text-red-400">
+              {errorMark && <span className="text-lg">ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢</span>}
+              <span>{errorText}</span>
+            </div>
+          )}
+          <div className="grid w-full max-w-[440px] grid-cols-2 gap-5">
             {COLORS.map((color, index) => (
               <button
                 key={color.name}
-                onPointerDown={() => handleSquarePress(index)}
+                onPointerDown={(event) => {
+                  event.preventDefault()
+                  handleSquarePress(index)
+                }}
                 className={`aspect-square w-full transition ${activeIndex === index ? 'scale-[1.04] shadow-[0_0_40px_rgba(255,255,255,0.2)]' : ''}`}
                 style={{
                   backgroundColor: color.value,

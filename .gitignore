@@ -1,4 +1,4 @@
-﻿node_modules
+node_modules
 .next
 out
 .env
@@ -8,4 +8,6 @@ out
 .env.production.local
 .DS_Store
 Thumbs.db
+dev.out.log
+dev.err.log
 

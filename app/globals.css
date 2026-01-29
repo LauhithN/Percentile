@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -80,5 +80,50 @@ main, header, section, footer {
 
 .button-brutal:hover {
   box-shadow: 0 0 0 1px rgba(0, 102, 255, 0.9), 0 16px 40px rgba(0, 102, 255, 0.25);
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.focus-flash {
+  animation: flash 0.2s ease-out;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.focus-ring {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.focus-ring:focus {
+  outline: none;
 }
 

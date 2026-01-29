@@ -1,17 +1,25 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
+import { TestType } from '@/lib/tests'
 
 interface ShareButtonsProps {
   percentile: number
+  testType: TestType
 }
 
-export function ShareButtons({ percentile }: ShareButtonsProps) {
+const SHARE_COPY: Record<TestType, (percentile: number) => string> = {
+  reaction: (percentile) => `I'm faster than ${percentile}% of people ? Can you beat me?`,
+  memory: (percentile) => `My memory is better than ${percentile}% of people ?? Test yours:`,
+  focus: (percentile) => `I'm more focused than ${percentile}% of people ?? Try it:`
+}
+
+export function ShareButtons({ percentile, testType }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false)
 
   const handleShare = () => {
     const origin = typeof window !== 'undefined' ? window.location.origin : ''
-    const text = `I'm faster than ${percentile}% of people ?? ${origin}`
+    const text = `${SHARE_COPY[testType](percentile)} ${origin}`
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`
     window.open(url, '_blank', 'noopener,noreferrer')
   }
@@ -41,4 +49,3 @@ export function ShareButtons({ percentile }: ShareButtonsProps) {
     </div>
   )
 }
-

@@ -1,4 +1,4 @@
-﻿import './globals.css'
+import './globals.css'
 import type { Metadata } from 'next'
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 
@@ -13,8 +13,15 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Percentile — Reaction Test',
-  description: 'A viral reaction-time test that tells you where you rank.'
+  title: 'Percentile ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Cognitive Tests',
+  description: 'Viral cognitive tests that rank your reaction, memory, and focus.'
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

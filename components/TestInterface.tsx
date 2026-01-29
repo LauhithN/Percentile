@@ -25,6 +25,13 @@ export function ReactionTest() {
   const lastTouchRef = useRef(0)
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  useEffect(() => {
     phaseRef.current = phase
   }, [phase])
 
@@ -158,7 +165,7 @@ export function ReactionTest() {
 
   return (
     <main
-      className={`relative flex min-h-[100dvh] cursor-pointer items-center justify-center ${transitionsEnabled ? 'transition-colors duration-200 ease-in-out' : ''} ${background}`}
+      className={`relative flex min-h-[100dvh] cursor-pointer select-none items-center justify-center ${transitionsEnabled ? 'transition-colors duration-200 ease-in-out' : ''} ${background}`}
       style={{ touchAction: 'none' }}
     >
       <div className="absolute left-6 top-6 text-xs uppercase tracking-[0.4em] text-white/70">
