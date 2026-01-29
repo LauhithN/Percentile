@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { Navbar } from '@/components/Navbar'
 import { ResultsCard } from '@/components/ResultsCard'
 import { TestCard } from '@/components/TestCard'
+import { Waitlist } from '@/components/Waitlist'
 import {
   calculateReactionPercentile,
   calculateMemoryPercentile,
@@ -296,6 +297,10 @@ export function ResultsClient() {
               <TestCard key={test.id} {...test} compact />
             ))}
           </div>
+        </section>
+
+        <section className="mt-16">
+          <Waitlist source="results" variant="compact" />
         </section>
 
         <Leaderboard />
