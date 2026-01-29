@@ -101,6 +101,10 @@ export function MemoryTest() {
       navigator.vibrate(50)
     }
 
+    // Trigger same animation as demo phase
+    setActiveIndex(index)
+    setTimeout(() => setActiveIndex(null), 200)
+
     const now = performance.now()
     const delta = lastClickRef.current ? now - lastClickRef.current : now - inputStartRef.current
     lastClickRef.current = now
@@ -114,11 +118,14 @@ export function MemoryTest() {
     if (isCorrect) {
       totalCorrectRef.current += 1
       setErrorText('')
+      setErrorMark(false)
     } else {
-      setErrorText(`Wrong. Expected ${COLORS[expected].name}.`)
+      setErrorText(COLORS[expected].name)
       setErrorMark(true)
-      window.setTimeout(() => setErrorMark(false), 400)
-      window.setTimeout(() => setErrorText(''), 600)
+      window.setTimeout(() => {
+        setErrorMark(false)
+        setErrorText('')
+      }, 800)
     }
 
     const nextInputIndex = inputIndex + 1
@@ -203,9 +210,11 @@ export function MemoryTest() {
         <div className="flex w-full max-w-3xl flex-col items-center gap-6">
           <div className="text-xs uppercase tracking-[0.4em] text-white/60">{statusText}</div>
           {errorText && (
-            <div className="flex items-center justify-center gap-2 text-xs uppercase tracking-[0.3em] text-red-400">
-              {errorMark && <span className="text-lg">ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢</span>}
-              <span>{errorText}</span>
+            <div className="text-center animate-in fade-in duration-200">
+              <div className="text-4xl font-bold text-red-500">WRONG</div>
+              <div className="mt-2 text-2xl font-semibold" style={{ color: COLORS.find(c => c.name === errorText)?.value || '#fff' }}>
+                EXPECTED {errorText.toUpperCase()}
+              </div>
             </div>
           )}
           <div className="grid w-full max-w-[440px] grid-cols-2 gap-5">
@@ -226,9 +235,11 @@ export function MemoryTest() {
               />
             ))}
           </div>
-          {feedback && (
-            <div className={`text-2xl ${feedback === 'success' ? 'text-green-400' : 'text-red-400'}`}>
-              {feedback === 'success' ? '?' : '?'}
+          {feedback && feedback === 'success' && (
+            <div className="flex flex-col items-center gap-4 animate-in zoom-in-50 duration-300">
+              <div className="text-6xl">✓</div>
+              <div className="text-2xl font-bold text-green-500">CORRECT!</div>
+              <div className="text-lg text-white/60">Next round...</div>
             </div>
           )}
         </div>
